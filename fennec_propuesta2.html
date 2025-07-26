@@ -1,0 +1,1465 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FennecSoft | Soluciones Digitales Inteligentes</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'fennec-black': '#121212',
+                        'fennec-dark': '#1E1E1E',
+                        'fennec-gray': '#2D2D2D',
+                        'fennec-light-gray': '#3D3D3D',
+                        'fennec-sand': '#D2B48C',
+                        'fennec-orange': '#FF8C00',
+                        'fennec-gold': '#DAA520'
+                    },
+                    fontFamily: {
+                        'sans': ['Inter', 'sans-serif'],
+                        'display': ['Montserrat', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@400;500;600;700;800&display=swap');
+        
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 80px;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #121212;
+        }
+        
+        .gradient-text {
+            background: linear-gradient(90deg, #FF8C00, #DAA520);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .fennec-card {
+            transition: all 0.3s ease;
+        }
+        
+        .fennec-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px -5px rgba(255, 140, 0, 0.1);
+        }
+        
+        .service-icon {
+            transition: all 0.3s ease;
+        }
+        
+        .fennec-card:hover .service-icon {
+            color: #FF8C00;
+        }
+        
+        .team-card {
+            overflow: hidden;
+        }
+        
+        .team-card .overlay {
+            transition: all 0.3s ease;
+            opacity: 0;
+        }
+        
+        .team-card:hover .overlay {
+            opacity: 1;
+        }
+        
+        .project-card {
+            overflow: hidden;
+        }
+        
+        .project-card img {
+            transition: transform 0.5s ease;
+        }
+        
+        .project-card:hover img {
+            transform: scale(1.05);
+        }
+        
+        .project-card .project-info {
+            transition: all 0.3s ease;
+            opacity: 0;
+        }
+        
+        .project-card:hover .project-info {
+            opacity: 1;
+        }
+        
+        /* Animaciones */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .animate-fadeIn {
+            animation: fadeIn 0.8s ease forwards;
+        }
+        
+        .delay-100 { animation-delay: 0.1s; }
+        .delay-200 { animation-delay: 0.2s; }
+        .delay-300 { animation-delay: 0.3s; }
+        .delay-400 { animation-delay: 0.4s; }
+        .delay-500 { animation-delay: 0.5s; }
+        
+        /* Fennec Fox SVG Animation */
+        .fennec-logo {
+            transition: all 0.5s ease;
+        }
+        
+        .fennec-logo:hover {
+            filter: drop-shadow(0 0 8px rgba(255, 140, 0, 0.6));
+        }
+        
+        .fennec-logo:hover .fennec-ear {
+            transform-origin: bottom center;
+            animation: earWiggle 1s ease-in-out;
+        }
+        
+        @keyframes earWiggle {
+            0%, 100% { transform: rotate(0deg); }
+            25% { transform: rotate(-5deg); }
+            75% { transform: rotate(5deg); }
+        }
+        
+        /* Scrollbar personalizado */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: #1E1E1E;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: #3D3D3D;
+            border-radius: 4px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: #FF8C00;
+        }
+        
+        /* Navegación activa */
+        .nav-link.active {
+            color: #FF8C00;
+            border-bottom: 2px solid #FF8C00;
+        }
+    </style>
+</head>
+<body class="text-gray-200">
+    <!-- Navbar -->
+    <nav class="fixed top-0 w-full bg-fennec-black/90 backdrop-blur-md z-50 border-b border-fennec-light-gray/20">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <a href="#inicio" class="flex items-center space-x-2">
+                <div class="fennec-logo w-10 h-10">
+                    <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M50 85C70 85 85 70 85 50C85 30 70 15 50 15C30 15 15 30 15 50C15 70 30 85 50 85Z" fill="#2D2D2D" stroke="#FF8C00" stroke-width="2"/>
+                        <path class="fennec-ear" d="M30 35C25 25 20 15 25 10C30 5 35 15 38 30" fill="#2D2D2D" stroke="#FF8C00" stroke-width="2"/>
+                        <path class="fennec-ear" d="M70 35C75 25 80 15 75 10C70 5 65 15 62 30" fill="#2D2D2D" stroke="#FF8C00" stroke-width="2"/>
+                        <circle cx="35" cy="45" r="5" fill="#FF8C00"/>
+                        <circle cx="65" cy="45" r="5" fill="#FF8C00"/>
+                        <path d="M40 60C45 65 55 65 60 60" stroke="#FF8C00" stroke-width="2" stroke-linecap="round"/>
+                        <path d="M25 50L15 45" stroke="#FF8C00" stroke-width="2" stroke-linecap="round"/>
+                        <path d="M75 50L85 45" stroke="#FF8C00" stroke-width="2" stroke-linecap="round"/>
+                    </svg>
+                </div>
+                <div>
+                    <span class="font-display font-bold text-xl text-white">Fennec<span class="text-fennec-orange">Soft</span></span>
+                </div>
+            </a>
+            
+            <!-- Navegación Desktop -->
+            <div class="hidden md:flex space-x-8">
+                <a href="#inicio" class="nav-link active py-2 font-medium hover:text-fennec-orange transition-colors">Inicio</a>
+                <a href="#quienes-somos" class="nav-link py-2 font-medium hover:text-fennec-orange transition-colors">Quiénes Somos</a>
+                <a href="#servicios" class="nav-link py-2 font-medium hover:text-fennec-orange transition-colors">Servicios</a>
+                <a href="#proyectos" class="nav-link py-2 font-medium hover:text-fennec-orange transition-colors">Proyectos</a>
+                <a href="#bitacora" class="nav-link py-2 font-medium hover:text-fennec-orange transition-colors">Bitácora</a>
+                <a href="#contacto" class="nav-link py-2 font-medium hover:text-fennec-orange transition-colors">Contacto</a>
+            </div>
+            
+            <!-- Botón móvil -->
+            <button id="mobile-menu-button" class="md:hidden text-white focus:outline-none">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+                </svg>
+            </button>
+        </div>
+        
+        <!-- Menú móvil -->
+        <div id="mobile-menu" class="hidden md:hidden bg-fennec-dark border-t border-fennec-light-gray/20">
+            <div class="container mx-auto px-4 py-2 flex flex-col space-y-3">
+                <a href="#inicio" class="mobile-nav-link py-2 font-medium hover:text-fennec-orange transition-colors">Inicio</a>
+                <a href="#quienes-somos" class="mobile-nav-link py-2 font-medium hover:text-fennec-orange transition-colors">Quiénes Somos</a>
+                <a href="#servicios" class="mobile-nav-link py-2 font-medium hover:text-fennec-orange transition-colors">Servicios</a>
+                <a href="#proyectos" class="mobile-nav-link py-2 font-medium hover:text-fennec-orange transition-colors">Proyectos</a>
+                <a href="#bitacora" class="mobile-nav-link py-2 font-medium hover:text-fennec-orange transition-colors">Bitácora</a>
+                <a href="#contacto" class="mobile-nav-link py-2 font-medium hover:text-fennec-orange transition-colors">Contacto</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="inicio" class="min-h-screen flex items-center justify-center bg-fennec-black relative overflow-hidden pt-16">
+        <div class="absolute inset-0 opacity-10">
+            <div class="absolute top-0 left-0 w-full h-full">
+                <svg width="100%" height="100%" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse">
+                            <path d="M 10 0 L 0 0 0 10" fill="none" stroke="#FF8C00" stroke-width="0.5" opacity="0.3"/>
+                        </pattern>
+                    </defs>
+                    <rect width="100%" height="100%" fill="url(#grid)" />
+                </svg>
+            </div>
+        </div>
+        
+        <div class="container mx-auto px-4 py-16 relative z-10">
+            <div class="flex flex-col md:flex-row items-center">
+                <div class="w-full md:w-1/2 mb-10 md:mb-0 animate-fadeIn">
+                    <h1 class="text-4xl md:text-5xl lg:text-6xl font-display font-bold mb-6">
+                        Transformamos <span class="gradient-text">ideas</span> en soluciones digitales <span class="gradient-text">inteligentes</span>
+                    </h1>
+                    <p class="text-lg md:text-xl text-gray-400 mb-8 max-w-lg">
+                        Desarrollamos software a medida que impulsa la innovación y optimiza procesos para empresas que buscan diferenciarse en la era digital.
+                    </p>
+                    <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
+                        <a href="#contacto" class="px-8 py-3 bg-gradient-to-r from-fennec-orange to-fennec-gold text-white font-medium rounded-md hover:shadow-lg hover:shadow-fennec-orange/20 transition-all">
+                            Contáctanos
+                        </a>
+                        <a href="#servicios" class="px-8 py-3 border border-fennec-orange text-fennec-orange font-medium rounded-md hover:bg-fennec-orange/10 transition-all">
+                            Nuestros servicios
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="w-full md:w-1/2 flex justify-center animate-fadeIn delay-200">
+                    <div class="relative w-full max-w-md">
+                        <svg viewBox="0 0 500 500" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full h-auto">
+                            <!-- Círculo base -->
+                            <circle cx="250" cy="250" r="200" fill="#2D2D2D" stroke="#FF8C00" stroke-width="2" stroke-dasharray="10 5" />
+                            
+                            <!-- Elementos decorativos -->
+                            <path d="M250 50C250 50 350 150 450 250C350 350 250 450 250 450C250 450 150 350 50 250C150 150 250 50 250 50Z" stroke="#DAA520" stroke-width="2" fill="none" opacity="0.5" />
+                            
+                            <!-- Orejas del zorro fennec estilizadas -->
+                            <path d="M200 200C150 150 100 50 150 50C200 50 200 150 220 200" fill="#2D2D2D" stroke="#FF8C00" stroke-width="3" />
+                            <path d="M300 200C350 150 400 50 350 50C300 50 300 150 280 200" fill="#2D2D2D" stroke="#FF8C00" stroke-width="3" />
+                            
+                            <!-- Cara estilizada -->
+                            <circle cx="250" cy="250" r="100" fill="#1E1E1E" stroke="#FF8C00" stroke-width="3" />
+                            <circle cx="200" cy="230" r="15" fill="#FF8C00" />
+                            <circle cx="300" cy="230" r="15" fill="#FF8C00" />
+                            <path d="M220 290C240 310 260 310 280 290" stroke="#FF8C00" stroke-width="3" stroke-linecap="round" />
+                            
+                            <!-- Elementos tecnológicos -->
+                            <circle cx="250" cy="250" r="150" stroke="#DAA520" stroke-width="1" stroke-dasharray="5 5" fill="none" />
+                            <path d="M250 100L250 400" stroke="#DAA520" stroke-width="1" stroke-dasharray="5 5" />
+                            <path d="M100 250L400 250" stroke="#DAA520" stroke-width="1" stroke-dasharray="5 5" />
+                            
+                            <!-- Código binario decorativo -->
+                            <text x="120" y="150" fill="#FF8C00" font-family="monospace" font-size="10" opacity="0.7">01001100</text>
+                            <text x="330" y="150" fill="#FF8C00" font-family="monospace" font-size="10" opacity="0.7">10110011</text>
+                            <text x="120" y="350" fill="#FF8C00" font-family="monospace" font-size="10" opacity="0.7">11001010</text>
+                            <text x="330" y="350" fill="#FF8C00" font-family="monospace" font-size="10" opacity="0.7">00101101</text>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Stats -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mt-16 animate-fadeIn delay-300">
+                <div class="bg-fennec-dark p-6 rounded-lg border border-fennec-light-gray/20">
+                    <div class="text-3xl font-bold text-fennec-orange mb-2">5+</div>
+                    <div class="text-sm text-gray-400">Años de experiencia</div>
+                </div>
+                <div class="bg-fennec-dark p-6 rounded-lg border border-fennec-light-gray/20">
+                    <div class="text-3xl font-bold text-fennec-orange mb-2">50+</div>
+                    <div class="text-sm text-gray-400">Proyectos completados</div>
+                </div>
+                <div class="bg-fennec-dark p-6 rounded-lg border border-fennec-light-gray/20">
+                    <div class="text-3xl font-bold text-fennec-orange mb-2">30+</div>
+                    <div class="text-sm text-gray-400">Clientes satisfechos</div>
+                </div>
+                <div class="bg-fennec-dark p-6 rounded-lg border border-fennec-light-gray/20">
+                    <div class="text-3xl font-bold text-fennec-orange mb-2">5</div>
+                    <div class="text-sm text-gray-400">Ingenieros expertos</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quiénes Somos -->
+    <section id="quienes-somos" class="py-20 bg-fennec-dark">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-display font-bold mb-4">Quiénes Somos</h2>
+                <div class="w-20 h-1 bg-gradient-to-r from-fennec-orange to-fennec-gold mx-auto mb-6"></div>
+                <p class="text-gray-400 max-w-2xl mx-auto">
+                    Somos un equipo de ingenieros informáticos chilenos apasionados por crear soluciones tecnológicas que marcan la diferencia. Nuestra combinación de experiencia técnica y visión estratégica nos permite desarrollar software que realmente impulsa el crecimiento de nuestros clientes.
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-8">
+                <!-- Gonzalo Hevia -->
+                <div class="team-card bg-fennec-gray rounded-lg overflow-hidden">
+                    <div class="relative h-64">
+                        <div class="absolute inset-0 bg-gradient-to-b from-fennec-orange/20 to-fennec-black/80 z-10"></div>
+                        <svg class="w-full h-full" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                            <rect width="200" height="200" fill="#2D2D2D"/>
+                            <circle cx="100" cy="70" r="40" fill="#3D3D3D"/>
+                            <rect x="60" y="110" width="80" height="90" fill="#3D3D3D"/>
+                            <path d="M100 70 Q 120 80 120 100 Q 120 120 100 130 Q 80 120 80 100 Q 80 80 100 70" fill="#D2B48C"/>
+                            <circle cx="85" cy="65" r="5" fill="#1E1E1E"/>
+                            <circle cx="115" cy="65" r="5" fill="#1E1E1E"/>
+                            <path d="M90 85 Q 100 95 110 85" stroke="#1E1E1E" stroke-width="2" fill="none"/>
+                        </svg>
+                        <div class="absolute bottom-0 left-0 right-0 p-4 z-20">
+                            <h3 class="text-lg font-semibold text-white">Gonzalo Hevia</h3>
+                            <p class="text-sm text-fennec-orange">CEO & Arquitecto de Software</p>
+                        </div>
+                        <div class="overlay absolute inset-0 bg-fennec-orange/80 flex items-center justify-center z-30 p-4">
+                            <div class="text-center">
+                                <p class="text-sm text-white">
+                                    Ingeniero con 10+ años de experiencia en arquitectura de sistemas distribuidos y liderazgo técnico.
+                                </p>
+                                <div class="flex justify-center mt-4 space-x-3">
+                                    <a href="#" class="text-white hover:text-fennec-black transition-colors">
+                                        <i class="fab fa-linkedin text-lg"></i>
+                                    </a>
+                                    <a href="#" class="text-white hover:text-fennec-black transition-colors">
+                                        <i class="fab fa-github text-lg"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Francisco Puebla -->
+                <div class="team-card bg-fennec-gray rounded-lg overflow-hidden">
+                    <div class="relative h-64">
+                        <div class="absolute inset-0 bg-gradient-to-b from-fennec-orange/20 to-fennec-black/80 z-10"></div>
+                        <svg class="w-full h-full" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                            <rect width="200" height="200" fill="#2D2D2D"/>
+                            <circle cx="100" cy="70" r="40" fill="#3D3D3D"/>
+                            <rect x="60" y="110" width="80" height="90" fill="#3D3D3D"/>
+                            <path d="M100 70 Q 120 80 120 100 Q 120 120 100 130 Q 80 120 80 100 Q 80 80 100 70" fill="#D2B48C"/>
+                            <circle cx="85" cy="65" r="5" fill="#1E1E1E"/>
+                            <circle cx="115" cy="65" r="5" fill="#1E1E1E"/>
+                            <path d="M90 85 Q 100 95 110 85" stroke="#1E1E1E" stroke-width="2" fill="none"/>
+                            <path d="M70 50 L 130 50" stroke="#1E1E1E" stroke-width="2" fill="none"/>
+                        </svg>
+                        <div class="absolute bottom-0 left-0 right-0 p-4 z-20">
+                            <h3 class="text-lg font-semibold text-white">Francisco Puebla</h3>
+                            <p class="text-sm text-fennec-orange">CTO & Desarrollador Backend</p>
+                        </div>
+                        <div class="overlay absolute inset-0 bg-fennec-orange/80 flex items-center justify-center z-30 p-4">
+                            <div class="text-center">
+                                <p class="text-sm text-white">
+                                    Especialista en sistemas distribuidos, microservicios y bases de datos de alto rendimiento.
+                                </p>
+                                <div class="flex justify-center mt-4 space-x-3">
+                                    <a href="#" class="text-white hover:text-fennec-black transition-colors">
+                                        <i class="fab fa-linkedin text-lg"></i>
+                                    </a>
+                                    <a href="#" class="text-white hover:text-fennec-black transition-colors">
+                                        <i class="fab fa-github text-lg"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Jaime Vidal -->
+                <div class="team-card bg-fennec-gray rounded-lg overflow-hidden">
+                    <div class="relative h-64">
+                        <div class="absolute inset-0 bg-gradient-to-b from-fennec-orange/20 to-fennec-black/80 z-10"></div>
+                        <svg class="w-full h-full" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                            <rect width="200" height="200" fill="#2D2D2D"/>
+                            <circle cx="100" cy="70" r="40" fill="#3D3D3D"/>
+                            <rect x="60" y="110" width="80" height="90" fill="#3D3D3D"/>
+                            <path d="M100 70 Q 120 80 120 100 Q 120 120 100 130 Q 80 120 80 100 Q 80 80 100 70" fill="#D2B48C"/>
+                            <circle cx="85" cy="65" r="5" fill="#1E1E1E"/>
+                            <circle cx="115" cy="65" r="5" fill="#1E1E1E"/>
+                            <path d="M90 85 Q 100 95 110 85" stroke="#1E1E1E" stroke-width="2" fill="none"/>
+                            <path d="M80 40 L 120 40" stroke="#1E1E1E" stroke-width="3" fill="none"/>
+                        </svg>
+                        <div class="absolute bottom-0 left-0 right-0 p-4 z-20">
+                            <h3 class="text-lg font-semibold text-white">Jaime Vidal</h3>
+                            <p class="text-sm text-fennec-orange">Líder de Desarrollo Frontend</p>
+                        </div>
+                        <div class="overlay absolute inset-0 bg-fennec-orange/80 flex items-center justify-center z-30 p-4">
+                            <div class="text-center">
+                                <p class="text-sm text-white">
+                                    Experto en interfaces de usuario, experiencia de usuario y desarrollo frontend moderno.
+                                </p>
+                                <div class="flex justify-center mt-4 space-x-3">
+                                    <a href="#" class="text-white hover:text-fennec-black transition-colors">
+                                        <i class="fab fa-linkedin text-lg"></i>
+                                    </a>
+                                    <a href="#" class="text-white hover:text-fennec-black transition-colors">
+                                        <i class="fab fa-github text-lg"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Daniel Madariaga -->
+                <div class="team-card bg-fennec-gray rounded-lg overflow-hidden">
+                    <div class="relative h-64">
+                        <div class="absolute inset-0 bg-gradient-to-b from-fennec-orange/20 to-fennec-black/80 z-10"></div>
+                        <svg class="w-full h-full" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                            <rect width="200" height="200" fill="#2D2D2D"/>
+                            <circle cx="100" cy="70" r="40" fill="#3D3D3D"/>
+                            <rect x="60" y="110" width="80" height="90" fill="#3D3D3D"/>
+                            <path d="M100 70 Q 120 80 120 100 Q 120 120 100 130 Q 80 120 80 100 Q 80 80 100 70" fill="#D2B48C"/>
+                            <circle cx="85" cy="65" r="5" fill="#1E1E1E"/>
+                            <circle cx="115" cy="65" r="5" fill="#1E1E1E"/>
+                            <path d="M90 85 Q 100 95 110 85" stroke="#1E1E1E" stroke-width="2" fill="none"/>
+                            <rect x="80" y="40" width="40" height="10" fill="#1E1E1E"/>
+                        </svg>
+                        <div class="absolute bottom-0 left-0 right-0 p-4 z-20">
+                            <h3 class="text-lg font-semibold text-white">Daniel Madariaga</h3>
+                            <p class="text-sm text-fennec-orange">DevOps & Cloud Architect</p>
+                        </div>
+                        <div class="overlay absolute inset-0 bg-fennec-orange/80 flex items-center justify-center z-30 p-4">
+                            <div class="text-center">
+                                <p class="text-sm text-white">
+                                    Especialista en infraestructura cloud, CI/CD y automatización de procesos de desarrollo.
+                                </p>
+                                <div class="flex justify-center mt-4 space-x-3">
+                                    <a href="#" class="text-white hover:text-fennec-black transition-colors">
+                                        <i class="fab fa-linkedin text-lg"></i>
+                                    </a>
+                                    <a href="#" class="text-white hover:text-fennec-black transition-colors">
+                                        <i class="fab fa-github text-lg"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Christian Silva -->
+                <div class="team-card bg-fennec-gray rounded-lg overflow-hidden">
+                    <div class="relative h-64">
+                        <div class="absolute inset-0 bg-gradient-to-b from-fennec-orange/20 to-fennec-black/80 z-10"></div>
+                        <svg class="w-full h-full" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                            <rect width="200" height="200" fill="#2D2D2D"/>
+                            <circle cx="100" cy="70" r="40" fill="#3D3D3D"/>
+                            <rect x="60" y="110" width="80" height="90" fill="#3D3D3D"/>
+                            <path d="M100 70 Q 120 80 120 100 Q 120 120 100 130 Q 80 120 80 100 Q 80 80 100 70" fill="#D2B48C"/>
+                            <circle cx="85" cy="65" r="5" fill="#1E1E1E"/>
+                            <circle cx="115" cy="65" r="5" fill="#1E1E1E"/>
+                            <path d="M90 85 Q 100 95 110 85" stroke="#1E1E1E" stroke-width="2" fill="none"/>
+                            <circle cx="100" cy="40" r="10" fill="#1E1E1E"/>
+                        </svg>
+                        <div class="absolute bottom-0 left-0 right-0 p-4 z-20">
+                            <h3 class="text-lg font-semibold text-white">Christian Silva</h3>
+                            <p class="text-sm text-fennec-orange">Data Scientist & ML Engineer</p>
+                        </div>
+                        <div class="overlay absolute inset-0 bg-fennec-orange/80 flex items-center justify-center z-30 p-4">
+                            <div class="text-center">
+                                <p class="text-sm text-white">
+                                    Experto en análisis de datos, machine learning e integración de IA en aplicaciones empresariales.
+                                </p>
+                                <div class="flex justify-center mt-4 space-x-3">
+                                    <a href="#" class="text-white hover:text-fennec-black transition-colors">
+                                        <i class="fab fa-linkedin text-lg"></i>
+                                    </a>
+                                    <a href="#" class="text-white hover:text-fennec-black transition-colors">
+                                        <i class="fab fa-github text-lg"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mt-16 bg-fennec-gray rounded-lg p-8 border border-fennec-light-gray/20">
+                <h3 class="text-2xl font-display font-semibold mb-4">Nuestra Misión</h3>
+                <p class="text-gray-300 mb-6">
+                    Desarrollar soluciones tecnológicas que transformen la manera en que las empresas operan, permitiéndoles alcanzar nuevos niveles de eficiencia, innovación y competitividad en un entorno digital en constante evolución.
+                </p>
+                
+                <h3 class="text-2xl font-display font-semibold mb-4">Nuestra Visión</h3>
+                <p class="text-gray-300">
+                    Ser reconocidos como un referente en el desarrollo de software en Chile y Latinoamérica, destacando por nuestra excelencia técnica, enfoque estratégico y compromiso con el éxito de nuestros clientes.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Servicios -->
+    <section id="servicios" class="py-20 bg-fennec-black">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-display font-bold mb-4">Nuestros Servicios</h2>
+                <div class="w-20 h-1 bg-gradient-to-r from-fennec-orange to-fennec-gold mx-auto mb-6"></div>
+                <p class="text-gray-400 max-w-2xl mx-auto">
+                    Ofrecemos soluciones tecnológicas integrales diseñadas para impulsar la transformación digital de su empresa y optimizar sus procesos de negocio.
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Desarrollo a medida -->
+                <div class="fennec-card bg-fennec-dark rounded-lg p-8 border border-fennec-light-gray/20 h-full">
+                    <div class="service-icon text-4xl text-fennec-sand mb-6">
+                        <i class="fas fa-code"></i>
+                    </div>
+                    <h3 class="text-xl font-display font-semibold mb-4">Desarrollo de Software a Medida</h3>
+                    <p class="text-gray-400 mb-6">
+                        Creamos soluciones personalizadas que se adaptan perfectamente a las necesidades específicas de su negocio, garantizando máxima eficiencia y escalabilidad.
+                    </p>
+                    <ul class="text-gray-400 space-y-2 mb-6">
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-fennec-orange mt-1 mr-2"></i>
+                            <span>Aplicaciones web y móviles empresariales</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-fennec-orange mt-1 mr-2"></i>
+                            <span>Sistemas de gestión internos</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-fennec-orange mt-1 mr-2"></i>
+                            <span>Plataformas e-commerce avanzadas</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <!-- Integración de sistemas -->
+                <div class="fennec-card bg-fennec-dark rounded-lg p-8 border border-fennec-light-gray/20 h-full">
+                    <div class="service-icon text-4xl text-fennec-sand mb-6">
+                        <i class="fas fa-network-wired"></i>
+                    </div>
+                    <h3 class="text-xl font-display font-semibold mb-4">Integración de Sistemas</h3>
+                    <p class="text-gray-400 mb-6">
+                        Conectamos sus aplicaciones y plataformas existentes para crear un ecosistema digital coherente que optimiza el flujo de información y procesos.
+                    </p>
+                    <ul class="text-gray-400 space-y-2 mb-6">
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-fennec-orange mt-1 mr-2"></i>
+                            <span>Desarrollo de APIs y microservicios</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-fennec-orange mt-1 mr-2"></i>
+                            <span>Integración con sistemas ERP y CRM</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-fennec-orange mt-1 mr-2"></i>
+                            <span>Soluciones de interoperabilidad</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <!-- Automatización -->
+                <div class="fennec-card bg-fennec-dark rounded-lg p-8 border border-fennec-light-gray/20 h-full">
+                    <div class="service-icon text-4xl text-fennec-sand mb-6">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <h3 class="text-xl font-display font-semibold mb-4">Automatización de Procesos</h3>
+                    <p class="text-gray-400 mb-6">
+                        Implementamos soluciones que automatizan tareas repetitivas, reducen errores y liberan el potencial de su equipo para enfocarse en actividades de mayor valor.
+                    </p>
+                    <ul class="text-gray-400 space-y-2 mb-6">
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-fennec-orange mt-1 mr-2"></i>
+                            <span>Flujos de trabajo automatizados</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-fennec-orange mt-1 mr-2"></i>
+                            <span>RPA (Robotic Process Automation)</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-fennec-orange mt-1 mr-2"></i>
+                            <span>Procesamiento inteligente de documentos</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <!-- Consultoría -->
+                <div class="fennec-card bg-fennec-dark rounded-lg p-8 border border-fennec-light-gray/20 h-full">
+                    <div class="service-icon text-4xl text-fennec-sand mb-6">
+                        <i class="fas fa-lightbulb"></i>
+                    </div>
+                    <h3 class="text-xl font-display font-semibold mb-4">Consultoría Tecnológica</h3>
+                    <p class="text-gray-400 mb-6">
+                        Asesoramos en la definición de estrategias digitales y selección de tecnologías que mejor se adapten a sus objetivos de negocio y desafíos específicos.
+                    </p>
+                    <ul class="text-gray-400 space-y-2 mb-6">
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-fennec-orange mt-1 mr-2"></i>
+                            <span>Auditoría y optimización de sistemas</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-fennec-orange mt-1 mr-2"></i>
+                            <span>Planificación de arquitectura tecnológica</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-fennec-orange mt-1 mr-2"></i>
+                            <span>Estrategias de transformación digital</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <!-- Cloud & DevOps -->
+                <div class="fennec-card bg-fennec-dark rounded-lg p-8 border border-fennec-light-gray/20 h-full">
+                    <div class="service-icon text-4xl text-fennec-sand mb-6">
+                        <i class="fas fa-cloud"></i>
+                    </div>
+                    <h3 class="text-xl font-display font-semibold mb-4">Cloud & DevOps</h3>
+                    <p class="text-gray-400 mb-6">
+                        Diseñamos e implementamos infraestructuras cloud robustas y procesos DevOps que garantizan alta disponibilidad, seguridad y agilidad en el desarrollo.
+                    </p>
+                    <ul class="text-gray-400 space-y-2 mb-6">
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-fennec-orange mt-1 mr-2"></i>
+                            <span>Migración a la nube</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-fennec-orange mt-1 mr-2"></i>
+                            <span>Implementación de CI/CD</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-fennec-orange mt-1 mr-2"></i>
+                            <span>Arquitecturas serverless y contenedores</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <!-- Mantenimiento -->
+                <div class="fennec-card bg-fennec-dark rounded-lg p-8 border border-fennec-light-gray/20 h-full">
+                    <div class="service-icon text-4xl text-fennec-sand mb-6">
+                        <i class="fas fa-tools"></i>
+                    </div>
+                    <h3 class="text-xl font-display font-semibold mb-4">Mantenimiento y Soporte</h3>
+                    <p class="text-gray-400 mb-6">
+                        Ofrecemos servicios continuos de mantenimiento, monitoreo y soporte para garantizar que sus sistemas funcionen de manera óptima y evolucionen con su negocio.
+                    </p>
+                    <ul class="text-gray-400 space-y-2 mb-6">
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-fennec-orange mt-1 mr-2"></i>
+                            <span>Soporte técnico especializado</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-fennec-orange mt-1 mr-2"></i>
+                            <span>Monitoreo proactivo</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-fennec-orange mt-1 mr-2"></i>
+                            <span>Actualizaciones y mejoras continuas</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="mt-16 text-center">
+                <a href="#contacto" class="inline-block px-8 py-3 bg-gradient-to-r from-fennec-orange to-fennec-gold text-white font-medium rounded-md hover:shadow-lg hover:shadow-fennec-orange/20 transition-all">
+                    Solicitar una consulta
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Proyectos -->
+    <section id="proyectos" class="py-20 bg-fennec-dark">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-display font-bold mb-4">Proyectos Destacados</h2>
+                <div class="w-20 h-1 bg-gradient-to-r from-fennec-orange to-fennec-gold mx-auto mb-6"></div>
+                <p class="text-gray-400 max-w-2xl mx-auto">
+                    Conoce algunos de nuestros proyectos más relevantes y cómo hemos ayudado a nuestros clientes a alcanzar sus objetivos de negocio a través de soluciones tecnológicas innovadoras.
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Proyecto 1 -->
+                <div class="project-card bg-fennec-gray rounded-lg overflow-hidden">
+                    <div class="relative h-64">
+                        <svg class="w-full h-full" viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+                            <rect width="400" height="300" fill="#2D2D2D"/>
+                            <rect x="50" y="50" width="300" height="200" fill="#3D3D3D" rx="5"/>
+                            <rect x="70" y="80" width="260" height="30" fill="#1E1E1E" rx="3"/>
+                            <rect x="70" y="130" width="120" height="100" fill="#1E1E1E" rx="3"/>
+                            <rect x="210" y="130" width="120" height="45" fill="#1E1E1E" rx="3"/>
+                            <rect x="210" y="185" width="120" height="45" fill="#1E1E1E" rx="3"/>
+                            <circle cx="85" cy="95" r="8" fill="#FF8C00"/>
+                            <rect x="100" y="90" width="80" height="10" fill="#FF8C00" rx="2"/>
+                            <rect x="190" y="90" width="40" height="10" fill="#D2B48C" rx="2"/>
+                        </svg>
+                        <div class="project-info absolute inset-0 bg-fennec-black/80 flex items-center justify-center p-6">
+                            <div>
+                                <h4 class="text-lg font-semibold text-white mb-2">Sistema de Gestión Logística</h4>
+                                <p class="text-sm text-gray-300 mb-4">
+                                    Plataforma integral para optimizar operaciones logísticas de una empresa de distribución nacional.
+                                </p>
+                                <div class="flex flex-wrap gap-2 mb-4">
+                                    <span class="text-xs bg-fennec-orange/20 text-fennec-orange px-2 py-1 rounded">React</span>
+                                    <span class="text-xs bg-fennec-orange/20 text-fennec-orange px-2 py-1 rounded">Node.js</span>
+                                    <span class="text-xs bg-fennec-orange/20 text-fennec-orange px-2 py-1 rounded">PostgreSQL</span>
+                                    <span class="text-xs bg-fennec-orange/20 text-fennec-orange px-2 py-1 rounded">AWS</span>
+                                </div>
+                                <a href="#" class="text-fennec-orange hover:text-fennec-gold transition-colors text-sm font-medium">
+                                    Ver detalles <i class="fas fa-arrow-right ml-1"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold mb-2">Sistema de Gestión Logística</h3>
+                        <p class="text-gray-400 text-sm">
+                            Reducción del 30% en tiempos de entrega y optimización de rutas para una empresa de distribución nacional.
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- Proyecto 2 -->
+                <div class="project-card bg-fennec-gray rounded-lg overflow-hidden">
+                    <div class="relative h-64">
+                        <svg class="w-full h-full" viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+                            <rect width="400" height="300" fill="#2D2D2D"/>
+                            <rect x="30" y="30" width="340" height="240" fill="#3D3D3D" rx="5"/>
+                            <circle cx="200" cy="100" r="50" fill="#1E1E1E"/>
+                            <path d="M160 180 L240 180 L200 230 Z" fill="#1E1E1E"/>
+                            <circle cx="200" cy="100" r="30" fill="#FF8C00"/>
+                            <rect x="100" y="180" width="200" height="15" fill="#1E1E1E" rx="2"/>
+                            <rect x="130" y="205" width="140" height="10" fill="#1E1E1E" rx="2"/>
+                            <rect x="150" y="225" width="100" height="10" fill="#1E1E1E" rx="2"/>
+                        </svg>
+                        <div class="project-info absolute inset-0 bg-fennec-black/80 flex items-center justify-center p-6">
+                            <div>
+                                <h4 class="text-lg font-semibold text-white mb-2">Plataforma de Análisis Financiero</h4>
+                                <p class="text-sm text-gray-300 mb-4">
+                                    Sistema de análisis predictivo para una institución financiera con visualización avanzada de datos.
+                                </p>
+                                <div class="flex flex-wrap gap-2 mb-4">
+                                    <span class="text-xs bg-fennec-orange/20 text-fennec-orange px-2 py-1 rounded">Vue.js</span>
+                                    <span class="text-xs bg-fennec-orange/20 text-fennec-orange px-2 py-1 rounded">Python</span>
+                                    <span class="text-xs bg-fennec-orange/20 text-fennec-orange px-2 py-1 rounded">TensorFlow</span>
+                                    <span class="text-xs bg-fennec-orange/20 text-fennec-orange px-2 py-1 rounded">GCP</span>
+                                </div>
+                                <a href="#" class="text-fennec-orange hover:text-fennec-gold transition-colors text-sm font-medium">
+                                    Ver detalles <i class="fas fa-arrow-right ml-1"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold mb-2">Plataforma de Análisis Financiero</h3>
+                        <p class="text-gray-400 text-sm">
+                            Implementación de modelos predictivos que mejoraron en un 25% la precisión en la evaluación de riesgos.
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- Proyecto 3 -->
+                <div class="project-card bg-fennec-gray rounded-lg overflow-hidden">
+                    <div class="relative h-64">
+                        <svg class="w-full h-full" viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+                            <rect width="400" height="300" fill="#2D2D2D"/>
+                            <rect x="40" y="40" width="320" height="220" fill="#3D3D3D" rx="5"/>
+                            <rect x="60" y="60" width="120" height="180" fill="#1E1E1E" rx="3"/>
+                            <rect x="200" y="60" width="140" height="80" fill="#1E1E1E" rx="3"/>
+                            <rect x="200" y="160" width="65" height="80" fill="#1E1E1E" rx="3"/>
+                            <rect x="275" y="160" width="65" height="80" fill="#1E1E1E" rx="3"/>
+                            <circle cx="120" cy="100" r="30" fill="#FF8C00"/>
+                            <rect x="90" y="150" width="60" height="10" fill="#D2B48C" rx="2"/>
+                            <rect x="80" y="170" width="80" height="10" fill="#D2B48C" rx="2"/>
+                            <rect x="90" y="190" width="60" height="10" fill="#D2B48C" rx="2"/>
+                            <rect x="90" y="210" width="60" height="10" fill="#D2B48C" rx="2"/>
+                        </svg>
+                        <div class="project-info absolute inset-0 bg-fennec-black/80 flex items-center justify-center p-6">
+                            <div>
+                                <h4 class="text-lg font-semibold text-white mb-2">App de Telemedicina</h4>
+                                <p class="text-sm text-gray-300 mb-4">
+                                    Aplicación móvil para consultas médicas remotas con integración de expedientes clínicos digitales.
+                                </p>
+                                <div class="flex flex-wrap gap-2 mb-4">
+                                    <span class="text-xs bg-fennec-orange/20 text-fennec-orange px-2 py-1 rounded">React Native</span>
+                                    <span class="text-xs bg-fennec-orange/20 text-fennec-orange px-2 py-1 rounded">Firebase</span>
+                                    <span class="text-xs bg-fennec-orange/20 text-fennec-orange px-2 py-1 rounded">WebRTC</span>
+                                    <span class="text-xs bg-fennec-orange/20 text-fennec-orange px-2 py-1 rounded">MongoDB</span>
+                                </div>
+                                <a href="#" class="text-fennec-orange hover:text-fennec-gold transition-colors text-sm font-medium">
+                                    Ver detalles <i class="fas fa-arrow-right ml-1"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold mb-2">App de Telemedicina</h3>
+                        <p class="text-gray-400 text-sm">
+                            Solución que permitió atender a más de 10,000 pacientes mensualmente durante la pandemia.
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- Proyecto 4 -->
+                <div class="project-card bg-fennec-gray rounded-lg overflow-hidden">
+                    <div class="relative h-64">
+                        <svg class="w-full h-full" viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+                            <rect width="400" height="300" fill="#2D2D2D"/>
+                            <rect x="50" y="50" width="300" height="200" fill="#3D3D3D" rx="5"/>
+                            <rect x="70" y="70" width="260" height="40" fill="#1E1E1E" rx="3"/>
+                            <rect x="70" y="130" width="80" height="100" fill="#1E1E1E" rx="3"/>
+                            <rect x="160" y="130" width="80" height="100" fill="#1E1E1E" rx="3"/>
+                            <rect x="250" y="130" width="80" height="100" fill="#1E1E1E" rx="3"/>
+                            <circle cx="110" cy="180" r="20" fill="#FF8C00"/>
+                            <circle cx="200" cy="180" r="20" fill="#D2B48C"/>
+                            <circle cx="290" cy="180" r="20" fill="#FF8C00"/>
+                            <rect x="90" y="85" width="40" height="10" fill="#FF8C00" rx="2"/>
+                            <rect x="140" y="85" width="160" height="10" fill="#D2B48C" rx="2"/>
+                        </svg>
+                        <div class="project-info absolute inset-0 bg-fennec-black/80 flex items-center justify-center p-6">
+                            <div>
+                                <h4 class="text-lg font-semibold text-white mb-2">Sistema de Automatización Industrial</h4>
+                                <p class="text-sm text-gray-300 mb-4">
+                                    Plataforma IoT para monitoreo y control de procesos industriales en tiempo real.
+                                </p>
+                                <div class="flex flex-wrap gap-2 mb-4">
+                                    <span class="text-xs bg-fennec-orange/20 text-fennec-orange px-2 py-1 rounded">Angular</span>
+                                    <span class="text-xs bg-fennec-orange/20 text-fennec-orange px-2 py-1 rounded">.NET Core</span>
+                                    <span class="text-xs bg-fennec-orange/20 text-fennec-orange px-2 py-1 rounded">MQTT</span>
+                                    <span class="text-xs bg-fennec-orange/20 text-fennec-orange px-2 py-1 rounded">Azure IoT</span>
+                                </div>
+                                <a href="#" class="text-fennec-orange hover:text-fennec-gold transition-colors text-sm font-medium">
+                                    Ver detalles <i class="fas fa-arrow-right ml-1"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold mb-2">Sistema de Automatización Industrial</h3>
+                        <p class="text-gray-400 text-sm">
+                            Incremento del 40% en eficiencia productiva y reducción del 25% en costos operativos.
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- Proyecto 5 -->
+                <div class="project-card bg-fennec-gray rounded-lg overflow-hidden">
+                    <div class="relative h-64">
+                        <svg class="w-full h-full" viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+                            <rect width="400" height="300" fill="#2D2D2D"/>
+                            <rect x="40" y="40" width="320" height="220" fill="#3D3D3D" rx="5"/>
+                            <rect x="60" y="70" width="280" height="160" fill="#1E1E1E" rx="3"/>
+                            <circle cx="200" cy="150" r="50" fill="#FF8C00"/>
+                            <path d="M180 130 L220 130 L200 110 Z" fill="#1E1E1E"/>
+                            <path d="M180 170 L220 170 L200 190 Z" fill="#1E1E1E"/>
+                            <path d="M170 150 L170 150 L150 130 L150 170 Z" fill="#1E1E1E"/>
+                            <path d="M230 150 L230 150 L250 130 L250 170 Z" fill="#1E1E1E"/>
+                        </svg>
+                        <div class="project-info absolute inset-0 bg-fennec-black/80 flex items-center justify-center p-6">
+                            <div>
+                                <h4 class="text-lg font-semibold text-white mb-2">Plataforma de Streaming Educativo</h4>
+                                <p class="text-sm text-gray-300 mb-4">
+                                    Sistema de distribución de contenido educativo con funcionalidades avanzadas de interacción.
+                                </p>
+                                <div class="flex flex-wrap gap-2 mb-4">
+                                    <span class="text-xs bg-fennec-orange/20 text-fennec-orange px-2 py-1 rounded">Next.js</span>
+                                    <span class="text-xs bg-fennec-orange/20 text-fennec-orange px-2 py-1 rounded">GraphQL</span>
+                                    <span class="text-xs bg-fennec-orange/20 text-fennec-orange px-2 py-1 rounded">AWS Media</span>
+                                    <span class="text-xs bg-fennec-orange/20 text-fennec-orange px-2 py-1 rounded">Redis</span>
+                                </div>
+                                <a href="#" class="text-fennec-orange hover:text-fennec-gold transition-colors text-sm font-medium">
+                                    Ver detalles <i class="fas fa-arrow-right ml-1"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold mb-2">Plataforma de Streaming Educativo</h3>
+                        <p class="text-gray-400 text-sm">
+                            Solución escalable que soporta más de 50,000 usuarios concurrentes con baja latencia.
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- Proyecto 6 -->
+                <div class="project-card bg-fennec-gray rounded-lg overflow-hidden">
+                    <div class="relative h-64">
+                        <svg class="w-full h-full" viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+                            <rect width="400" height="300" fill="#2D2D2D"/>
+                            <rect x="50" y="50" width="300" height="200" fill="#3D3D3D" rx="5"/>
+                            <rect x="70" y="70" width="260" height="30" fill="#1E1E1E" rx="3"/>
+                            <rect x="70" y="110" width="125" height="120" fill="#1E1E1E" rx="3"/>
+                            <rect x="205" y="110" width="125" height="120" fill="#1E1E1E" rx="3"/>
+                            <circle cx="132" cy="170" r="30" fill="#FF8C00"/>
+                            <rect x="112" cy="170" width="40" height="5" fill="#1E1E1E" rx="1"/>
+                            <rect x="132" cy="150" width="5" height="40" fill="#1E1E1E" rx="1"/>
+                            <path d="M240 140 L280 140 L260 160 L240 140" fill="#D2B48C"/>
+                            <path d="M240 180 L280 180 L260 200 L240 180" fill="#D2B48C"/>
+                            <path d="M240 160 L280 160 L260 140 L240 160" fill="#FF8C00"/>
+                            <path d="M240 200 L280 200 L260 180 L240 200" fill="#FF8C00"/>
+                        </svg>
+                        <div class="project-info absolute inset-0 bg-fennec-black/80 flex items-center justify-center p-6">
+                            <div>
+                                <h4 class="text-lg font-semibold text-white mb-2">Sistema de Gestión Hospitalaria</h4>
+                                <p class="text-sm text-gray-300 mb-4">
+                                    Plataforma integral para administración de recursos, pacientes y procesos clínicos.
+                                </p>
+                                <div class="flex flex-wrap gap-2 mb-4">
+                                    <span class="text-xs bg-fennec-orange/20 text-fennec-orange px-2 py-1 rounded">Java</span>
+                                    <span class="text-xs bg-fennec-orange/20 text-fennec-orange px-2 py-1 rounded">Spring Boot</span>
+                                    <span class="text-xs bg-fennec-orange/20 text-fennec-orange px-2 py-1 rounded">Oracle</span>
+                                    <span class="text-xs bg-fennec-orange/20 text-fennec-orange px-2 py-1 rounded">React</span>
+                                </div>
+                                <a href="#" class="text-fennec-orange hover:text-fennec-gold transition-colors text-sm font-medium">
+                                    Ver detalles <i class="fas fa-arrow-right ml-1"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold mb-2">Sistema de Gestión Hospitalaria</h3>
+                        <p class="text-gray-400 text-sm">
+                            Mejora del 35% en la eficiencia administrativa y reducción de errores médicos en un 45%.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mt-16 text-center">
+                <a href="#" class="inline-block px-8 py-3 border border-fennec-orange text-fennec-orange font-medium rounded-md hover:bg-fennec-orange/10 transition-all">
+                    Ver todos los proyectos
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Bitácora Fennec -->
+    <section id="bitacora" class="py-20 bg-fennec-black">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-display font-bold mb-4">Bitácora Fennec</h2>
+                <div class="w-20 h-1 bg-gradient-to-r from-fennec-orange to-fennec-gold mx-auto mb-6"></div>
+                <p class="text-gray-400 max-w-2xl mx-auto">
+                    Compartimos conocimiento, experiencias y reflexiones sobre desarrollo de software, arquitectura y tendencias tecnológicas.
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Artículo 1 -->
+                <div class="fennec-card bg-fennec-dark rounded-lg overflow-hidden border border-fennec-light-gray/20">
+                    <div class="h-48 bg-fennec-gray relative">
+                        <svg class="w-full h-full" viewBox="0 0 400 200" xmlns="http://www.w3.org/2000/svg">
+                            <rect width="400" height="200" fill="#2D2D2D"/>
+                            <circle cx="200" cy="100" r="60" fill="#3D3D3D"/>
+                            <path d="M170 70 L230 70 L200 40 Z" fill="#FF8C00"/>
+                            <path d="M170 130 L230 130 L200 160 Z" fill="#FF8C00"/>
+                            <rect x="190" y="70" width="20" height="60" fill="#FF8C00"/>
+                            <circle cx="200" cy="100" r="15" fill="#2D2D2D"/>
+                        </svg>
+                        <div class="absolute top-4 left-4 bg-fennec-orange text-white text-xs px-2 py-1 rounded">
+                            Arquitectura
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold mb-3">Microservicios vs. Monolitos: Eligiendo la arquitectura correcta</h3>
+                        <p class="text-gray-400 text-sm mb-4">
+                            Un análisis detallado sobre cuándo y por qué elegir cada enfoque arquitectónico según las necesidades del proyecto.
+                        </p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-xs text-gray-500">15 de Junio, 2023</span>
+                            <a href="#" class="text-fennec-orange hover:text-fennec-gold transition-colors text-sm">
+                                Leer más <i class="fas fa-arrow-right ml-1"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Artículo 2 -->
+                <div class="fennec-card bg-fennec-dark rounded-lg overflow-hidden border border-fennec-light-gray/20">
+                    <div class="h-48 bg-fennec-gray relative">
+                        <svg class="w-full h-full" viewBox="0 0 400 200" xmlns="http://www.w3.org/2000/svg">
+                            <rect width="400" height="200" fill="#2D2D2D"/>
+                            <rect x="100" y="50" width="200" height="100" fill="#3D3D3D" rx="5"/>
+                            <rect x="120" y="70" width="160" height="15" fill="#FF8C00" rx="2"/>
+                            <rect x="120" y="95" width="160" height="10" fill="#D2B48C" rx="2"/>
+                            <rect x="120" y="115" width="160" height="10" fill="#D2B48C" rx="2"/>
+                            <rect x="120" y="135" width="100" height="10" fill="#D2B48C" rx="2"/>
+                        </svg>
+                        <div class="absolute top-4 left-4 bg-fennec-orange text-white text-xs px-2 py-1 rounded">
+                            Desarrollo
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold mb-3">Clean Code: Prácticas para un código mantenible y escalable</h3>
+                        <p class="text-gray-400 text-sm mb-4">
+                            Principios y técnicas para escribir código limpio que facilite el mantenimiento y la colaboración en equipos.
+                        </p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-xs text-gray-500">28 de Mayo, 2023</span>
+                            <a href="#" class="text-fennec-orange hover:text-fennec-gold transition-colors text-sm">
+                                Leer más <i class="fas fa-arrow-right ml-1"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Artículo 3 -->
+                <div class="fennec-card bg-fennec-dark rounded-lg overflow-hidden border border-fennec-light-gray/20">
+                    <div class="h-48 bg-fennec-gray relative">
+                        <svg class="w-full h-full" viewBox="0 0 400 200" xmlns="http://www.w3.org/2000/svg">
+                            <rect width="400" height="200" fill="#2D2D2D"/>
+                            <path d="M150 50 L250 50 L300 100 L250 150 L150 150 L100 100 Z" fill="#3D3D3D"/>
+                            <circle cx="200" cy="100" r="30" fill="#FF8C00"/>
+                            <path d="M185 85 L215 85 L215 115 L185 115 Z" fill="#2D2D2D"/>
+                        </svg>
+                        <div class="absolute top-4 left-4 bg-fennec-orange text-white text-xs px-2 py-1 rounded">
+                            Inteligencia Artificial
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold mb-3">Implementando IA en aplicaciones empresariales: Casos prácticos</h3>
+                        <p class="text-gray-400 text-sm mb-4">
+                            Cómo integrar modelos de inteligencia artificial para resolver problemas reales de negocio de forma efectiva.
+                        </p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-xs text-gray-500">10 de Mayo, 2023</span>
+                            <a href="#" class="text-fennec-orange hover:text-fennec-gold transition-colors text-sm">
+                                Leer más <i class="fas fa-arrow-right ml-1"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mt-16 text-center">
+                <a href="#" class="inline-block px-8 py-3 border border-fennec-orange text-fennec-orange font-medium rounded-md hover:bg-fennec-orange/10 transition-all">
+                    Ver todos los artículos
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contacto -->
+    <section id="contacto" class="py-20 bg-fennec-dark">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-display font-bold mb-4">Contáctanos</h2>
+                <div class="w-20 h-1 bg-gradient-to-r from-fennec-orange to-fennec-gold mx-auto mb-6"></div>
+                <p class="text-gray-400 max-w-2xl mx-auto">
+                    ¿Tienes un proyecto en mente o necesitas asesoría tecnológica? Estamos aquí para ayudarte. Completa el formulario y nos pondremos en contacto contigo a la brevedad.
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                <div class="bg-fennec-black rounded-lg p-8 border border-fennec-light-gray/20">
+                    <h3 class="text-2xl font-display font-semibold mb-6">Envíanos un mensaje</h3>
+                    
+                    <form id="contact-form" class="space-y-6">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <label for="name" class="block text-sm font-medium text-gray-400 mb-2">Nombre completo</label>
+                                <input type="text" id="name" name="name" class="w-full px-4 py-3 bg-fennec-gray border border-fennec-light-gray/20 rounded-md focus:outline-none focus:ring-2 focus:ring-fennec-orange/50 text-white" required>
+                            </div>
+                            <div>
+                                <label for="email" class="block text-sm font-medium text-gray-400 mb-2">Correo electrónico</label>
+                                <input type="email" id="email" name="email" class="w-full px-4 py-3 bg-fennec-gray border border-fennec-light-gray/20 rounded-md focus:outline-none focus:ring-2 focus:ring-fennec-orange/50 text-white" required>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <label for="company" class="block text-sm font-medium text-gray-400 mb-2">Empresa (opcional)</label>
+                            <input type="text" id="company" name="company" class="w-full px-4 py-3 bg-fennec-gray border border-fennec-light-gray/20 rounded-md focus:outline-none focus:ring-2 focus:ring-fennec-orange/50 text-white">
+                        </div>
+                        
+                        <div>
+                            <label for="subject" class="block text-sm font-medium text-gray-400 mb-2">Asunto</label>
+                            <select id="subject" name="subject" class="w-full px-4 py-3 bg-fennec-gray border border-fennec-light-gray/20 rounded-md focus:outline-none focus:ring-2 focus:ring-fennec-orange/50 text-white" required>
+                                <option value="">Selecciona una opción</option>
+                                <option value="proyecto">Consulta sobre un proyecto</option>
+                                <option value="servicio">Información sobre servicios</option>
+                                <option value="colaboracion">Propuesta de colaboración</option>
+                                <option value="otro">Otro</option>
+                            </select>
+                        </div>
+                        
+                        <div>
+                            <label for="message" class="block text-sm font-medium text-gray-400 mb-2">Mensaje</label>
+                            <textarea id="message" name="message" rows="5" class="w-full px-4 py-3 bg-fennec-gray border border-fennec-light-gray/20 rounded-md focus:outline-none focus:ring-2 focus:ring-fennec-orange/50 text-white" required></textarea>
+                        </div>
+                        
+                        <div>
+                            <button type="submit" class="w-full px-6 py-3 bg-gradient-to-r from-fennec-orange to-fennec-gold text-white font-medium rounded-md hover:shadow-lg hover:shadow-fennec-orange/20 transition-all">
+                                Enviar mensaje
+                            </button>
+                        </div>
+                    </form>
+                </div>
+                
+                <div>
+                    <div class="bg-fennec-black rounded-lg p-8 border border-fennec-light-gray/20 mb-8">
+                        <h3 class="text-2xl font-display font-semibold mb-6">Información de contacto</h3>
+                        
+                        <div class="space-y-6">
+                            <div class="flex items-start">
+                                <div class="flex-shrink-0 h-10 w-10 rounded-full bg-fennec-orange/20 flex items-center justify-center text-fennec-orange">
+                                    <i class="fas fa-envelope"></i>
+                                </div>
+                                <div class="ml-4">
+                                    <p class="text-sm font-medium text-gray-400">Email</p>
+                                    <a href="mailto:contacto@fennecsoft.cl" class="text-white hover:text-fennec-orange transition-colors">contacto@fennecsoft.cl</a>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start">
+                                <div class="flex-shrink-0 h-10 w-10 rounded-full bg-fennec-orange/20 flex items-center justify-center text-fennec-orange">
+                                    <i class="fas fa-phone"></i>
+                                </div>
+                                <div class="ml-4">
+                                    <p class="text-sm font-medium text-gray-400">Teléfono</p>
+                                    <a href="tel:+56912345678" class="text-white hover:text-fennec-orange transition-colors">+56 9 1234 5678</a>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start">
+                                <div class="flex-shrink-0 h-10 w-10 rounded-full bg-fennec-orange/20 flex items-center justify-center text-fennec-orange">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                </div>
+                                <div class="ml-4">
+                                    <p class="text-sm font-medium text-gray-400">Dirección</p>
+                                    <p class="text-white">Av. Apoquindo 4700, Of. 1601, Las Condes, Santiago, Chile</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-8">
+                            <h4 class="text-lg font-semibold mb-4">Síguenos</h4>
+                            <div class="flex space-x-4">
+                                <a href="#" class="h-10 w-10 rounded-full bg-fennec-gray flex items-center justify-center text-white hover:bg-fennec-orange transition-colors">
+                                    <i class="fab fa-linkedin-in"></i>
+                                </a>
+                                <a href="#" class="h-10 w-10 rounded-full bg-fennec-gray flex items-center justify-center text-white hover:bg-fennec-orange transition-colors">
+                                    <i class="fab fa-github"></i>
+                                </a>
+                                <a href="#" class="h-10 w-10 rounded-full bg-fennec-gray flex items-center justify-center text-white hover:bg-fennec-orange transition-colors">
+                                    <i class="fab fa-twitter"></i>
+                                </a>
+                                <a href="#" class="h-10 w-10 rounded-full bg-fennec-gray flex items-center justify-center text-white hover:bg-fennec-orange transition-colors">
+                                    <i class="fab fa-instagram"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-fennec-black rounded-lg p-8 border border-fennec-light-gray/20">
+                        <h3 class="text-2xl font-display font-semibold mb-6">Horario de atención</h3>
+                        
+                        <div class="space-y-3">
+                            <div class="flex justify-between">
+                                <span class="text-gray-400">Lunes - Viernes</span>
+                                <span class="text-white">9:00 - 18:00</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-gray-400">Sábado</span>
+                                <span class="text-white">10:00 - 14:00</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-gray-400">Domingo</span>
+                                <span class="text-white">Cerrado</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-fennec-black border-t border-fennec-light-gray/20 pt-16 pb-8">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
+                <div>
+                    <div class="flex items-center space-x-2 mb-6">
+                        <div class="fennec-logo w-10 h-10">
+                            <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M50 85C70 85 85 70 85 50C85 30 70 15 50 15C30 15 15 30 15 50C15 70 30 85 50 85Z" fill="#2D2D2D" stroke="#FF8C00" stroke-width="2"/>
+                                <path class="fennec-ear" d="M30 35C25 25 20 15 25 10C30 5 35 15 38 30" fill="#2D2D2D" stroke="#FF8C00" stroke-width="2"/>
+                                <path class="fennec-ear" d="M70 35C75 25 80 15 75 10C70 5 65 15 62 30" fill="#2D2D2D" stroke="#FF8C00" stroke-width="2"/>
+                                <circle cx="35" cy="45" r="5" fill="#FF8C00"/>
+                                <circle cx="65" cy="45" r="5" fill="#FF8C00"/>
+                                <path d="M40 60C45 65 55 65 60 60" stroke="#FF8C00" stroke-width="2" stroke-linecap="round"/>
+                                <path d="M25 50L15 45" stroke="#FF8C00" stroke-width="2" stroke-linecap="round"/>
+                                <path d="M75 50L85 45" stroke="#FF8C00" stroke-width="2" stroke-linecap="round"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <span class="font-display font-bold text-xl text-white">Fennec<span class="text-fennec-orange">Soft</span></span>
+                        </div>
+                    </div>
+                    <p class="text-gray-400 mb-6">
+                        Transformamos ideas en soluciones digitales inteligentes y sostenibles para empresas que buscan innovar y optimizar sus procesos.
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-fennec-orange transition-colors">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-fennec-orange transition-colors">
+                            <i class="fab fa-github"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-fennec-orange transition-colors">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-fennec-orange transition-colors">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-semibold text-white mb-6">Enlaces rápidos</h4>
+                    <ul class="space-y-3">
+                        <li>
+                            <a href="#inicio" class="text-gray-400 hover:text-fennec-orange transition-colors">Inicio</a>
+                        </li>
+                        <li>
+                            <a href="#quienes-somos" class="text-gray-400 hover:text-fennec-orange transition-colors">Quiénes Somos</a>
+                        </li>
+                        <li>
+                            <a href="#servicios" class="text-gray-400 hover:text-fennec-orange transition-colors">Servicios</a>
+                        </li>
+                        <li>
+                            <a href="#proyectos" class="text-gray-400 hover:text-fennec-orange transition-colors">Proyectos</a>
+                        </li>
+                        <li>
+                            <a href="#bitacora" class="text-gray-400 hover:text-fennec-orange transition-colors">Bitácora</a>
+                        </li>
+                        <li>
+                            <a href="#contacto" class="text-gray-400 hover:text-fennec-orange transition-colors">Contacto</a>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-semibold text-white mb-6">Servicios</h4>
+                    <ul class="space-y-3">
+                        <li>
+                            <a href="#servicios" class="text-gray-400 hover:text-fennec-orange transition-colors">Desarrollo de Software</a>
+                        </li>
+                        <li>
+                            <a href="#servicios" class="text-gray-400 hover:text-fennec-orange transition-colors">Integración de Sistemas</a>
+                        </li>
+                        <li>
+                            <a href="#servicios" class="text-gray-400 hover:text-fennec-orange transition-colors">Automatización de Procesos</a>
+                        </li>
+                        <li>
+                            <a href="#servicios" class="text-gray-400 hover:text-fennec-orange transition-colors">Consultoría Tecnológica</a>
+                        </li>
+                        <li>
+                            <a href="#servicios" class="text-gray-400 hover:text-fennec-orange transition-colors">Cloud & DevOps</a>
+                        </li>
+                        <li>
+                            <a href="#servicios" class="text-gray-400 hover:text-fennec-orange transition-colors">Mantenimiento y Soporte</a>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-semibold text-white mb-6">Contacto</h4>
+                    <ul class="space-y-4">
+                        <li class="flex items-start">
+                            <i class="fas fa-envelope text-fennec-orange mt-1 mr-3"></i>
+                            <span class="text-gray-400">contacto@fennecsoft.cl</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-phone text-fennec-orange mt-1 mr-3"></i>
+                            <span class="text-gray-400">+56 9 1234 5678</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-map-marker-alt text-fennec-orange mt-1 mr-3"></i>
+                            <span class="text-gray-400">Av. Apoquindo 4700, Of. 1601, Las Condes, Santiago, Chile</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-fennec-light-gray/20 pt-8">
+                <div class="flex flex-col md:flex-row justify-between items-center">
+                    <p class="text-gray-500 text-sm mb-4 md:mb-0">
+                        &copy; 2023 FennecSoft. Todos los derechos reservados.
+                    </p>
+                    <div class="flex space-x-6">
+                        <a href="#" class="text-gray-500 hover:text-fennec-orange text-sm transition-colors">Política de Privacidad</a>
+                        <a href="#" class="text-gray-500 hover:text-fennec-orange text-sm transition-colors">Términos de Servicio</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- 404 Page (Hidden) -->
+    <div id="page-404" class="hidden fixed inset-0 bg-fennec-black z-50 flex items-center justify-center">
+        <div class="container mx-auto px-4 text-center">
+            <div class="fennec-logo w-32 h-32 mx-auto mb-8">
+                <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M50 85C70 85 85 70 85 50C85 30 70 15 50 15C30 15 15 30 15 50C15 70 30 85 50 85Z" fill="#2D2D2D" stroke="#FF8C00" stroke-width="2"/>
+                    <path class="fennec-ear" d="M30 35C25 25 20 15 25 10C30 5 35 15 38 30" fill="#2D2D2D" stroke="#FF8C00" stroke-width="2"/>
+                    <path class="fennec-ear" d="M70 35C75 25 80 15 75 10C70 5 65 15 62 30" fill="#2D2D2D" stroke="#FF8C00" stroke-width="2"/>
+                    <circle cx="35" cy="45" r="5" fill="#FF8C00"/>
+                    <circle cx="65" cy="45" r="5" fill="#FF8C00"/>
+                    <path d="M40 65C45 60 55 60 60 65" stroke="#FF8C00" stroke-width="2" stroke-linecap="round"/>
+                    <path d="M25 50L15 45" stroke="#FF8C00" stroke-width="2" stroke-linecap="round"/>
+                    <path d="M75 50L85 45" stroke="#FF8C00" stroke-width="2" stroke-linecap="round"/>
+                </svg>
+            </div>
+            
+            <h1 class="text-6xl md:text-8xl font-display font-bold mb-6">
+                <span class="text-white">4</span>
+                <span class="text-fennec-orange">0</span>
+                <span class="text-white">4</span>
+            </h1>
+            
+            <h2 class="text-2xl md:text-3xl font-display font-semibold mb-6">
+                Parece que te has adentrado demasiado en el desierto
+            </h2>
+            
+            <p class="text-gray-400 max-w-lg mx-auto mb-8">
+                La página que buscas no existe o ha sido movida. Nuestro zorro fennec no pudo encontrarla a pesar de sus grandes orejas.
+            </p>
+            
+            <a href="#inicio" class="inline-block px-8 py-3 bg-gradient-to-r from-fennec-orange to-fennec-gold text-white font-medium rounded-md hover:shadow-lg hover:shadow-fennec-orange/20 transition-all">
+                Volver al inicio
+            </a>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script>
+        // Menú móvil
+        document.getElementById('mobile-menu-button').addEventListener('click', function() {
+            const mobileMenu = document.getElementById('mobile-menu');
+            mobileMenu.classList.toggle('hidden');
+        });
+        
+        // Navegación activa
+        const sections = document.querySelectorAll('section');
+        const navLinks = document.querySelectorAll('.nav-link');
+        const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
+        
+        function setActiveLink() {
+            let current = '';
+            
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                
+                if (window.scrollY >= (sectionTop - 300)) {
+                    current = section.getAttribute('id');
+                }
+            });
+            
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${current}`) {
+                    link.classList.add('active');
+                }
+            });
+            
+            mobileNavLinks.forEach(link => {
+                if (link.getAttribute('href') === `#${current}`) {
+                    link.classList.add('text-fennec-orange');
+                } else {
+                    link.classList.remove('text-fennec-orange');
+                }
+            });
+        }
+        
+        window.addEventListener('scroll', setActiveLink);
+        
+        // Cerrar menú móvil al hacer clic en un enlace
+        mobileNavLinks.forEach(link => {
+            link.addEventListener('click', function() {
+                document.getElementById('mobile-menu').classList.add('hidden');
+            });
+        });
+        
+        // Formulario de contacto
+        document.getElementById('contact-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Simulación de envío
+            const submitButton = this.querySelector('button[type="submit"]');
+            const originalText = submitButton.innerHTML;
+            
+            submitButton.disabled = true;
+            submitButton.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i> Enviando...';
+            
+            setTimeout(() => {
+                // Mostrar mensaje de éxito
+                this.reset();
+                submitButton.innerHTML = '<i class="fas fa-check mr-2"></i> ¡Mensaje enviado!';
+                
+                setTimeout(() => {
+                    submitButton.disabled = false;
+                    submitButton.innerHTML = originalText;
+                }, 3000);
+            }, 1500);
+        });
+        
+        // Animación al hacer scroll
+        const animateOnScroll = () => {
+            const elements = document.querySelectorAll('.fennec-card, .team-card, .project-card');
+            
+            elements.forEach(element => {
+                const elementPosition = element.getBoundingClientRect().top;
+                const screenPosition = window.innerHeight / 1.2;
+                
+                if (elementPosition < screenPosition) {
+                    element.style.opacity = '1';
+                    element.style.transform = 'translateY(0)';
+                }
+            });
+        };
+        
+        // Inicializar elementos con opacidad 0
+        document.querySelectorAll('.fennec-card, .team-card, .project-card').forEach(element => {
+            element.style.opacity = '0';
+            element.style.transform = 'translateY(20px)';
+            element.style.transition = 'all 0.5s ease';
+        });
+        
+        window.addEventListener('scroll', animateOnScroll);
+        window.addEventListener('load', animateOnScroll);
+        
+        // Smooth scroll para enlaces internos
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'965125f9c43a29fe',t:'MTc1MzUwNDA4Ni4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
